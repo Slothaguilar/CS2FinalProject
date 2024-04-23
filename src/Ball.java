@@ -24,6 +24,11 @@ public class Ball {
     }
 
     public void draw(Graphics g) {
-
+        g.setColor(color);
+        g.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+    }
+    public void move() {
+        x = x + dx;
+        y = y + dy;
     }
 }
