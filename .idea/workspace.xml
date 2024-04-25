@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ac9257-1245-4b75-8344-1b7984ab3fa3" name="Changes" comment="Created the IntelliJ project final project.&#10;Created each class&#10;Declared all instance variables&#10;Wrote the constructors&#10;Wrote all the methods headers">
+    <list default="true" id="15ac9257-1245-4b75-8344-1b7984ab3fa3" name="Changes" comment="Started my project and printed out a window with instructions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
@@ -80,11 +80,20 @@
       <option name="project" value="LOCAL" />
       <updated>1713634075696</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Started my project and printed out a window with instructions">
+      <option name="closed" value="true" />
+      <created>1713913865497</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713913865497</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created the IntelliJ project final project.&#10;Created each class&#10;Declared all instance variables&#10;Wrote the constructors&#10;Wrote all the methods headers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created the IntelliJ project final project.&#10;Created each class&#10;Declared all instance variables&#10;Wrote the constructors&#10;Wrote all the methods headers" />
+    <MESSAGE value="Started my project and printed out a window with instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started my project and printed out a window with instructions" />
   </component>
 </project>
