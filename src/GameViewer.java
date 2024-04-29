@@ -19,22 +19,40 @@ public class GameViewer extends JFrame {
     public GameViewer(Game game, Ball mainBall) {
         this.game = game;
         this. mainBall = mainBall;
+        Image = new ImageIcon("Resources/board.png").getImage();
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("PushBall");
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setVisible(true);
     }
+
+    public java.awt.Image getImage() {
+        return Image;
+    }
+
     public void paint(Graphics g) {
         if (game.getRounds() == 0){
             paintIntro(g);
         }
         else {
             // clear the window
-            clearWindow(g);
+            if(game.isGameOver()){
+                gameOver(g);
+            }
+            else {
+                clearWindow(g);
+                g.drawImage(Image, 50, 50, 700, 500, this);
 
-            game.getMainBall().draw(g);
-            game.getGun().draw(g);
+                game.getMainBall().draw(g);
+                game.getGun().draw(g);
+
+                // if pressed draw them
+                if (game.getMiniBall().isOnScreen()) {
+                    game.getMiniBall().draw(g);
+                }
+            }
+
         }
 
     }
@@ -52,5 +70,10 @@ public class GameViewer extends JFrame {
         g.setColor(Color.white);
         g.drawRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
         g.fillRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
+    }
+    public void gameOver(Graphics g){
+        g.setFont(new Font("Serif", Font.PLAIN, 90));
+
+        g.drawString(game.getWinner() + " wins!", 125, 300);
     }
 }

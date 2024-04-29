@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ac9257-1245-4b75-8344-1b7984ab3fa3" name="Changes" comment="Started my project and printed out a window with instructions">
+    <list default="true" id="15ac9257-1245-4b75-8344-1b7984ab3fa3" name="Changes" comment="printed out the inscructions and when clicked it goes away and have my &quot;gun&quot; move">
+      <change afterPath="$PROJECT_DIR$/Resources/board.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CS2FinalProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CS2FinalProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameViewer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MiniBall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MiniBall.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +52,11 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Resources" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Game" />
@@ -88,12 +96,21 @@
       <option name="project" value="LOCAL" />
       <updated>1713913865497</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="printed out the inscructions and when clicked it goes away and have my &quot;gun&quot; move">
+      <option name="closed" value="true" />
+      <created>1714077912791</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714077912791</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created the IntelliJ project final project.&#10;Created each class&#10;Declared all instance variables&#10;Wrote the constructors&#10;Wrote all the methods headers" />
     <MESSAGE value="Started my project and printed out a window with instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started my project and printed out a window with instructions" />
+    <MESSAGE value="printed out the inscructions and when clicked it goes away and have my &quot;gun&quot; move" />
+    <option name="LAST_COMMIT_MESSAGE" value="printed out the inscructions and when clicked it goes away and have my &quot;gun&quot; move" />
   </component>
 </project>

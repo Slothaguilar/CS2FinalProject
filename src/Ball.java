@@ -7,29 +7,51 @@ public class Ball {
     private int dy;             // delta y in one time unit
     private int radius;         // Radius of the ball
     private Color color;
+    private MiniBall miniBall;
 
-    public Ball() {
-        x = 0;
-        y = 5;
-        dx = 12;
-        dy = 13;
-        radius = 10;
-        color = Color.BLUE;
+    public Ball(MiniBall miniBall) {
+        x = 368;
+        y = 270;
+        dx = 2;
+        dy = 2;
+        radius = 30;
+        color = Color.GREEN;
+        this.miniBall= miniBall;
     }
-    public boolean bounce(int xLow, int xHigh, int yLow, int yHigh) {
-        return true;
-    }
-    public void touch(MiniBall a){
+    public void bounce(int xLow, int xHigh, int yLow, int yHigh) {
+        // Check for an x bounce.  Note that we bounce if the x is too
+        //  low or too high AND IS HEADING IN THE WRONG DIRECTION.
+        if ((x - radius <= xLow && dx < 0) || (x + radius >= xHigh && dx > 0)) {
+            dx = -dx;
+        }
 
+        // Now check for a y bounce.
+        if ((y - radius <= yLow && dy < 0) || (y + radius >= yHigh && dy > 0)) {
+            dy = -dy;
+        }
+    }
+
+    public int getX() {
+        return x;
     }
 
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillOval(100, 100, 2 * radius, 2 * radius);
+        g.fillOval(x, y, 2 * radius, 2 * radius);
+
     }
     public void move() {
-        x = x + dx;
-        y = y + dy;
+        if((miniBall.getX() >= x && miniBall.getX() < x + 2*radius) && (miniBall.getY() >= y && miniBall.getY() <= 2+radius + y)) {
+            x = x - dx;
+        }
+
     }
 
+
 }
+
+
+
+
+
+
