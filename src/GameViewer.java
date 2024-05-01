@@ -46,11 +46,15 @@ public class GameViewer extends JFrame {
 
                 game.getMainBall().draw(g);
                 game.getGun().draw(g);
+                game.getComGun().draw(g);
 
                 // if pressed draw them
                 if (game.getMiniBall().isOnScreen()) {
                     game.getMiniBall().draw(g);
                 }
+
+                game.getComMiniBall().draw(g);
+
             }
 
         }

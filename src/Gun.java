@@ -7,36 +7,33 @@ public class Gun  {
     private int y2;
     private int dx;             // delta x in one time unit
     private int dy;             // delta y in one time unit
-    private int angle;
     private boolean canShoot;
     private final int width = 100;
     private final int height = 50;
     private boolean isMoving;
+    private Color color;
 
 
-    public Gun() {
-        x = 650;
-        y = 50;
-        x2 = 50;
-        y2 = 50;
+    public Gun(int x, int y, Color color) {
+        this.x = x;
+        this.y = y;
         dx = 2;
         dy = 2;
-        angle = 0;
         isMoving = true;
         canShoot = true;
+        x2 = 50;
+        y2 = 50;
+        this.color = color;
+
 
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
         //g.fillOval(250, 100, 5, 5);
+        g.setColor(color);
 
         g.drawRect(x,y, width,height);
         g.fillRect(x,y,width,height);
-
-        g.setColor(Color.ORANGE);
-        g.drawRect(x2,y2, width,height);
-        g.fillRect(x2,y2,width,height);
 
     }
     public void setCenter(int xIn, int yIn) {
@@ -45,8 +42,6 @@ public class Gun  {
     }
     public void move() {
         y = y + dy;
-
-        y2 = y2 + dy;
 
     }
     public void bounce(int yLow, int yHigh) {
@@ -83,11 +78,5 @@ public class Gun  {
         this.canShoot = canShoot;
     }
 
-    public int getX2() {
-        return x2;
-    }
 
-    public int getY2() {
-        return y2;
-    }
 }

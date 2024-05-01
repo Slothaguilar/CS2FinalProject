@@ -15,6 +15,9 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
     private Ball mainBall;
     private Gun gun;
     private MiniBall miniBall;
+
+    private Gun comGun;
+    private MiniBall comMiniBall;
     private String winner;
     private boolean gameOver;
 
@@ -22,9 +25,15 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
     public Game() {
         // Initialize Squares in the board
 
-        gun = new Gun();
-        miniBall = new MiniBall(gun);
-        mainBall = new Ball(miniBall);
+        // user
+        gun = new Gun(650,50, Color.BLUE);
+        miniBall = new MiniBall(gun, gun.getX(), gun.getY(), -5, Color.BLUE);
+
+        // computer
+        comGun = new Gun(50,50, Color.ORANGE);
+        comMiniBall = new MiniBall(comGun, comGun.getX(), comGun.getX(), 7, Color.ORANGE);
+
+        mainBall = new Ball(miniBall, comMiniBall);
 
         window = new GameViewer(this, mainBall);
         rounds = 0;
@@ -58,6 +67,14 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
 
     public int getRounds() {
         return rounds;
+    }
+
+    public MiniBall getComMiniBall() {
+        return comMiniBall;
+    }
+
+    public Gun getComGun() {
+        return comGun;
     }
 
     public MiniBall getMiniBall() {
@@ -120,9 +137,11 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
                 gun.bounce(25, 550);
             }
 
+
             if (miniBall.isOnScreen()) {
                 miniBall.move();
             }
+
             if (miniBall.getX() == 50) {
                 miniBall.setOnScreen(false);
                 gun.setCanShoot(true);
@@ -134,7 +153,43 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
                 winner = "Player 1";
 
             }
-            window.repaint();
+            if (mainBall.getX() >= 630){
+                gameOver = true;
+                winner = "Player 2";
+            }
+
+            // TODO: code when the computer would realse their mini ball
+        // computer gun moving
+           comGun.move();
+            comGun.bounce(25,550);
+
+        if (comMiniBall.canBeMoved()) {
+            comMiniBall.move();
+            comGun.setCanShoot(false);
+
+        }
+        if (comMiniBall.getX() >= 750) {
+            comGun.setCanShoot(true);
+            comMiniBall.setX(comGun.getX()+100);
+            comMiniBall.setY(comGun.getY() + 10);
+        }
+
+        else if(comGun.isCanShoot()){
+            comMiniBall.setX(comGun.getX()+100);
+            comMiniBall.setY(comGun.getY() + 10);
+        }
+
+        // boolean to decide to move the ball or to follow the gun
+
+        // decide when it becomes true and when it becomes false
+
+
+        // with math.random between 0 and 2
+        // if it is less than 1 then dont
+        // if greater than 1 then do realse the mini balls
+
+
+        window.repaint();
 
     }
 

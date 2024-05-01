@@ -8,8 +8,10 @@ public class Ball {
     private int radius;         // Radius of the ball
     private Color color;
     private MiniBall miniBall;
+    private MiniBall comMiniBall;
 
-    public Ball(MiniBall miniBall) {
+
+    public Ball(MiniBall miniBall, MiniBall comMiniBall) {
         x = 368;
         y = 270;
         dx = 2;
@@ -17,6 +19,7 @@ public class Ball {
         radius = 30;
         color = Color.GREEN;
         this.miniBall= miniBall;
+        this.comMiniBall = comMiniBall;
     }
     public void bounce(int xLow, int xHigh, int yLow, int yHigh) {
         // Check for an x bounce.  Note that we bounce if the x is too
@@ -43,6 +46,9 @@ public class Ball {
     public void move() {
         if((miniBall.getX() >= x && miniBall.getX() < x + 2*radius) && (miniBall.getY() >= y && miniBall.getY() <= 2+radius + y)) {
             x = x - dx;
+        }
+        if ((comMiniBall.getX() >= x && comMiniBall.getX() < x + 2*radius) && (comMiniBall.getY() >= y && comMiniBall.getY() <= 2+radius + y)){
+            x = x +dx;
         }
 
     }

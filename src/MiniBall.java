@@ -12,17 +12,16 @@ public class MiniBall {
     private int x2;              // Center x
     private int y2;
 
-    public MiniBall(Gun gun) {
-        dx = 5;
+    public MiniBall(Gun gun, int x, int y, int dx, Color color) {
+        this.dx = dx;
         dy = 5;
         radius = 10;
-        color = Color.BLUE;
+        this.color = color;
         isOnScreen = false;
         this.gun = gun;
-        x = gun.getX();
-        y = gun.getY();
-        x2 = gun.getX2();
-        y2 = gun.getY2();
+        this. x = x;
+        this.y = y;
+
     }
 
     public int getX() {
@@ -41,14 +40,6 @@ public class MiniBall {
         this.y = y;
     }
 
-    public int getX2() {
-        return x2;
-    }
-
-    public int getY2() {
-        return y2;
-    }
-
     public int getRadius() {
         return radius;
     }
@@ -59,10 +50,20 @@ public class MiniBall {
 
     }
     public void move() {
-        x = x - dx;
+        x = x + dx;
 
-        x2 = x2 + dx;
+    }
+    public void bounce(int xLow, int xHigh, int yLow, int yHigh) {
+        // Check for an x bounce.  Note that we bounce if the x is too
+        //  low or too high AND IS HEADING IN THE WRONG DIRECTION.
+        if ((x - radius <= xLow && dx < 0) || (x + radius >= xHigh && dx > 0)) {
+            dx = -dx;
+        }
 
+        // Now check for a y bounce.
+        if ((y - radius <= yLow && dy < 0) || (y + radius >= yHigh && dy > 0)) {
+            dy = -dy;
+        }
     }
 
     public boolean isOnScreen() {
@@ -71,5 +72,15 @@ public class MiniBall {
 
     public void setOnScreen(boolean onScreen) {
         isOnScreen = onScreen;
+    }
+
+    public boolean canBeMoved(){
+        double random = (Math.random()*2);
+
+        if(random >= 1){
+            return false;
+        }
+
+        return true;
     }
 }
