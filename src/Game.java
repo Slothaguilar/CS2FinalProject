@@ -186,13 +186,14 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
             comGun.move();
             comGun.bounce(25, 550);
 
-            if (comMiniBall.canBeMoved() ) {
-                comMiniBall.move();
-                if (!(comGun.getY() > 330) && !(comGun.getY() < 270) ) {
-                    comGun.setCanShoot(false);
-                }
-
+            if (!(comGun.getY() > 300) && !(comGun.getY() < 270) ) {
+                comGun.setCanShoot(false);
             }
+
+            if (!(comGun.isCanShoot())){
+                comMiniBall.move();
+            }
+
             else if (comGun.isCanShoot()) {
                 comMiniBall.setX(comGun.getX() + 100);
                 comMiniBall.setY(comGun.getY() + 10);
@@ -202,6 +203,7 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
                 comMiniBall.setX(comGun.getX() + 100);
                 comMiniBall.setY(comGun.getY() + 10);
             }
+
 
         }
 
