@@ -38,17 +38,32 @@ public class Ball {
         return x;
     }
 
+    public int getY() {
+        return y;
+    }
+
     public void draw(Graphics g) {
         g.setColor(color);
         g.fillOval(x, y, 2 * radius, 2 * radius);
 
     }
     public void move() {
-        if((miniBall.getX() >= x && miniBall.getX() < x + 2*radius) && (miniBall.getY() >= y && miniBall.getY() <= 2+radius + y)) {
-            x = x - dx;
+        if (x <= miniBall.getX() && miniBall.getX() <= x + 2*radius){
+            if (!(miniBall.getY() > 330)){
+                if (!(miniBall.getY() + (miniBall.getRadius() *2) < y)){
+                    x = x - dx;
+                }
+            }
         }
-        if ((comMiniBall.getX() >= x && comMiniBall.getX() < x + 2*radius) && (comMiniBall.getY() >= y && comMiniBall.getY() <= 2+radius + y)){
-            x = x +dx;
+
+
+
+        if (x <= comMiniBall.getX() && comMiniBall.getX() <= x + 2*radius){
+            if (!(comMiniBall.getY() > 330)){
+                if (!(comMiniBall.getY() + (comMiniBall.getRadius() *2) < y)){
+                    x = x + dx;
+                }
+            }
         }
 
     }

@@ -68,6 +68,11 @@ public class GameViewer extends JFrame {
         g.drawString("on the side of the computer. However the gun you have spins in a circle",25,200);
         g.drawString("so you will have to be careful when to press the gun. There will be 3",25,250);
         g.drawString( "rounds so make sure to win most of them! Good luck!",25,300);
+
+        g.drawString("Easy", 25, 400);
+        g.drawString("Hard", 600, 400);
+
+
     }
     public void clearWindow(Graphics g){
         // clear the window

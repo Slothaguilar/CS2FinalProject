@@ -7,7 +7,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class Game implements KeyListener, ActionListener, MouseListener, MouseMotionListener {
-    private boolean isGameOver;
+    // levels
+    private boolean easy;
+    private boolean hard;
+
     private static final int DELAY_IN_MILLISEC = 20;
     private GameViewer window;
     private int wins;
@@ -42,7 +45,6 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
         window.addKeyListener(this);
 
         // Initialize winning stats variables
-        this.isGameOver = false;
         this.winner = "";
 
 
@@ -128,9 +130,9 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
     }
     public void actionPerformed(ActionEvent e) {		// NEW #5 !!!!!!!!!!
 
-            mainBall.move();
-            // if the mini ball "touches" or has the same x and y then disapear the mini balls and move the main Ball
-            mainBall.bounce(50, 750, 50, 500);
+        mainBall.move();
+        // if the mini ball "touches" or has the same x and y then disapear the mini balls and move the main Ball
+        mainBall.bounce(50, 750, 50, 500);
 
             if (gun.isMoving()) {
                 gun.move();
@@ -147,36 +149,60 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
                 gun.setCanShoot(true);
             }
 
-            //System.out.println(mainBall.getX());
-            if (mainBall.getX() <= 50) {
+
+            if (mainBall.getX() <= 168) {
                 gameOver = true;
                 winner = "Player 1";
 
             }
-            if (mainBall.getX() >= 630){
+            if (mainBall.getX() >= 565){
                 gameOver = true;
                 winner = "Player 2";
             }
 
             // TODO: code when the computer would realse their mini ball
         // computer gun moving
-           comGun.move();
-            comGun.bounce(25,550);
 
-        if (comMiniBall.canBeMoved()) {
-            comMiniBall.move();
-            comGun.setCanShoot(false);
+        if (easy) {
 
+            comGun.move();
+            comGun.bounce(25, 550);
+
+            if (comMiniBall.canBeMoved()) {
+                comMiniBall.move();
+                comGun.setCanShoot(false);
+            }
+            if (comMiniBall.getX() >= 750) {
+                comGun.setCanShoot(true);
+                comMiniBall.setX(comGun.getX() + 100);
+                comMiniBall.setY(comGun.getY() + 10);
+            } else if (comGun.isCanShoot()) {
+                comMiniBall.setX(comGun.getX() + 100);
+                comMiniBall.setY(comGun.getY() + 10);
+            }
         }
-        if (comMiniBall.getX() >= 750) {
-            comGun.setCanShoot(true);
-            comMiniBall.setX(comGun.getX()+100);
-            comMiniBall.setY(comGun.getY() + 10);
-        }
 
-        else if(comGun.isCanShoot()){
-            comMiniBall.setX(comGun.getX()+100);
-            comMiniBall.setY(comGun.getY() + 10);
+        if (hard){
+            comGun.move();
+            comGun.bounce(25, 550);
+
+            if (comMiniBall.canBeMoved() ) {
+                comMiniBall.move();
+                if (!(comGun.getY() > 330) && !(comGun.getY() < 270) ) {
+                    comGun.setCanShoot(false);
+                }
+
+            }
+            else if (comGun.isCanShoot()) {
+                comMiniBall.setX(comGun.getX() + 100);
+                comMiniBall.setY(comGun.getY() + 10);
+            }
+            if (comMiniBall.getX() >= 750) {
+                comGun.setCanShoot(true);
+                comMiniBall.setX(comGun.getX() + 100);
+                comMiniBall.setY(comGun.getY() + 10);
+            }
+
         }
 
         // boolean to decide to move the ball or to follow the gun
@@ -196,6 +222,16 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
     public void mousePressed(MouseEvent e) {
         // Change the background
         rounds++;
+
+        if(e.getX() > 400){
+            hard = true;
+            easy = false;
+        }
+        else if (e.getX() < 400){
+            easy = true;
+            hard = false;
+        }
+
         window.repaint();
 
     }
