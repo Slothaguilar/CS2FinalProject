@@ -52,7 +52,7 @@ public class GameViewer extends JFrame {
 //                if (game.getMiniBall().isOnScreen()) {
 //                    game.getMiniBall().draw(g);
 //                }
-                game.getMiniBall().draw(g);
+                 game.getMiniBall().draw(g);
 
                 game.getComMiniBall().draw(g);
 

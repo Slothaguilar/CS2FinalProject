@@ -148,6 +148,10 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
                 miniBall.setOnScreen(false);
                 gun.setCanShoot(true);
             }
+        if (gun.isCanShoot()) {
+            miniBall.setX(gun.getX() - 2* miniBall.getRadius());
+            miniBall.setY(gun.getY() + 10);
+        }
 
 
             if (mainBall.getX() <= 168) {
