@@ -10,10 +10,13 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
     // levels
     private boolean easy;
     private boolean hard;
+    private boolean extreme;
+    private int counter;
+
+    private boolean go;
 
     private static final int DELAY_IN_MILLISEC = 20;
     private GameViewer window;
-    private int wins;
     private int rounds;
     private Ball mainBall;
     private Gun gun;
@@ -27,14 +30,16 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
 
     public Game() {
         // Initialize Squares in the board
-
+        go = false;
         // user
         gun = new Gun(650,50, Color.BLUE);
-        miniBall = new MiniBall(gun, gun.getX(), gun.getY(), -5, Color.BLUE);
+        Color color = new Color(56, 73, 220);
+        miniBall = new MiniBall(gun, gun.getX(), gun.getY(), -5, color);
 
         // computer
         comGun = new Gun(50,50, Color.ORANGE);
-        comMiniBall = new MiniBall(comGun, comGun.getX(), comGun.getX(), 7, Color.ORANGE);
+        Color color1 = new Color(236, 147, 57);
+        comMiniBall = new MiniBall(comGun, comGun.getX(), comGun.getX(), 7, color1);
 
         mainBall = new Ball(miniBall, comMiniBall);
 
@@ -46,6 +51,7 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
 
         // Initialize winning stats variables
         this.winner = "";
+        this.counter = 0;
 
 
         this.window.addMouseListener(this);
@@ -65,6 +71,14 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
 
         window.repaint();
 
+    }
+
+    public boolean isGo() {
+        return go;
+    }
+
+    public void setGo(boolean go) {
+        this.go = go;
     }
 
     public int getRounds() {
@@ -95,7 +109,7 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
         switch(e.getKeyCode())
         {
             case KeyEvent.VK_UP:
-                gun.setMoving(false);
+                //gun.setMoving(false);
                 if(gun.isCanShoot()) {
                     miniBall.setX(gun.getX());
                     miniBall.setY(gun.getY() + 10);
@@ -130,9 +144,10 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
     }
     public void actionPerformed(ActionEvent e) {		// NEW #5 !!!!!!!!!!
 
-        mainBall.move();
-        // if the mini ball "touches" or has the same x and y then disapear the mini balls and move the main Ball
-        mainBall.bounce(50, 750, 50, 500);
+        if (go) {
+            mainBall.move();
+            // if the mini ball "touches" or has the same x and y then disapear the mini balls and move the main Ball
+            mainBall.bounce(50, 750, 50, 500);
 
             if (gun.isMoving()) {
                 gun.move();
@@ -148,94 +163,135 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
                 miniBall.setOnScreen(false);
                 gun.setCanShoot(true);
             }
-        if (gun.isCanShoot()) {
-            miniBall.setX(gun.getX() - 2* miniBall.getRadius());
-            miniBall.setY(gun.getY() + 10);
-        }
+            if (gun.isCanShoot()) {
+                miniBall.setX(gun.getX() - 2 * miniBall.getRadius());
+                miniBall.setY(gun.getY() + 10);
+            }
 
 
             if (mainBall.getX() <= 168) {
                 gameOver = true;
-                winner = "Player 1";
+                winner = "You win!";
 
             }
-            if (mainBall.getX() >= 565){
+            if (mainBall.getX() >= 565) {
                 gameOver = true;
-                winner = "Player 2";
+                winner = "The Computer";
             }
 
             // TODO: code when the computer would realse their mini ball
-        // computer gun moving
+            // computer gun moving
 
-        if (easy) {
+            if (easy) {
 
-            comGun.move();
-            comGun.bounce(25, 550);
+                comGun.move();
+                comGun.bounce(25, 550);
 
-            if (comMiniBall.canBeMoved()) {
-                comMiniBall.move();
-                comGun.setCanShoot(false);
+                if (comMiniBall.canBeMoved()) {
+                    comMiniBall.move();
+                    comGun.setCanShoot(false);
+                }
+                if (comMiniBall.getX() >= 750) {
+                    comGun.setCanShoot(true);
+                    comMiniBall.setX(comGun.getX() + 100);
+                    comMiniBall.setY(comGun.getY() + 10);
+                } else if (comGun.isCanShoot()) {
+                    comMiniBall.setX(comGun.getX() + 100);
+                    comMiniBall.setY(comGun.getY() + 10);
+                }
             }
-            if (comMiniBall.getX() >= 750) {
-                comGun.setCanShoot(true);
-                comMiniBall.setX(comGun.getX() + 100);
-                comMiniBall.setY(comGun.getY() + 10);
-            } else if (comGun.isCanShoot()) {
-                comMiniBall.setX(comGun.getX() + 100);
-                comMiniBall.setY(comGun.getY() + 10);
+
+            else if (hard) {
+                comGun.move();
+                comGun.bounce(25, 550);
+
+                if (!(comGun.getY() > 300) && !(comGun.getY() < 270)) {
+                    comGun.setCanShoot(false);
+                }
+
+                if (!(comGun.isCanShoot())) {
+                    comMiniBall.move();
+                } else if (comGun.isCanShoot()) {
+                    comMiniBall.setX(comGun.getX() + 100);
+                    comMiniBall.setY(comGun.getY() + 10);
+                }
+                if (comMiniBall.getX() >= 750) {
+                    comGun.setCanShoot(true);
+                    comMiniBall.setX(comGun.getX() + 100);
+                    comMiniBall.setY(comGun.getY() + 10);
+                }
+
+
             }
+
+            else if(extreme){
+                if (counter == 0){
+                    comGun.setDy(9);
+                    gun.setDy(9);
+                    miniBall.addDX(-7);
+                }
+                    counter++;
+                    comGun.move();
+                    comGun.bounce(25, 550);
+
+                    if (!(comGun.getY() > 300) && !(comGun.getY() < 270)) {
+                        comGun.setCanShoot(false);
+                    }
+
+                    if (!(comGun.isCanShoot())) {
+                        comMiniBall.move();
+                    } else if (comGun.isCanShoot()) {
+                        comMiniBall.setX(comGun.getX() + 100);
+                        comMiniBall.setY(comGun.getY() + 10);
+                    }
+                    if (comMiniBall.getX() >= 750) {
+                        comGun.setCanShoot(true);
+                        comMiniBall.setX(comGun.getX() + 100);
+                        comMiniBall.setY(comGun.getY() + 10);
+                    }
+            }
+
+            // boolean to decide to move the ball or to follow the gun
+
+            // decide when it becomes true and when it becomes false
+
+
+            // with math.random between 0 and 2
+            // if it is less than 1 then dont
+            // if greater than 1 then do realse the mini balls
+
+
+            window.repaint();
         }
-
-        if (hard){
-            comGun.move();
-            comGun.bounce(25, 550);
-
-            if (!(comGun.getY() > 300) && !(comGun.getY() < 270) ) {
-                comGun.setCanShoot(false);
-            }
-
-            if (!(comGun.isCanShoot())){
-                comMiniBall.move();
-            }
-
-            else if (comGun.isCanShoot()) {
-                comMiniBall.setX(comGun.getX() + 100);
-                comMiniBall.setY(comGun.getY() + 10);
-            }
-            if (comMiniBall.getX() >= 750) {
-                comGun.setCanShoot(true);
-                comMiniBall.setX(comGun.getX() + 100);
-                comMiniBall.setY(comGun.getY() + 10);
-            }
-
-
-        }
-
-        // boolean to decide to move the ball or to follow the gun
-
-        // decide when it becomes true and when it becomes false
-
-
-        // with math.random between 0 and 2
-        // if it is less than 1 then dont
-        // if greater than 1 then do realse the mini balls
-
-
-        window.repaint();
 
     }
 
     public void mousePressed(MouseEvent e) {
-        // Change the background
-        rounds++;
+//        // Change the background
+//        rounds++;
 
-        if(e.getX() > 400){
-            hard = true;
-            easy = false;
-        }
-        else if (e.getX() < 400){
-            easy = true;
+        if(e.getX() > 200 && e.getX() < 245){
             hard = false;
+            easy = true;
+            extreme = false;
+            // Change the background
+            rounds++;
+        }
+        // 500, 550
+        else if (e.getX() < 550 && e.getX() > 500){
+            easy = false;
+            hard = true;
+            extreme = false;
+            // Change the background
+            rounds++;
+        }
+        // 330, 420
+        else if(e.getX() < 420 && e.getX() > 330){
+            easy = false;
+            hard = false;
+            extreme = true;
+            // Change the background
+            rounds++;
         }
 
         window.repaint();
@@ -255,7 +311,7 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        //System.out.println(e.getX());
     }
 
     @Override
@@ -269,7 +325,7 @@ public class Game implements KeyListener, ActionListener, MouseListener, MouseMo
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
+        //System.out.println(e.getX());
     }
 
     public static void main(String[] args) {

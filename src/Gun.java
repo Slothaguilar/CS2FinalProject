@@ -18,7 +18,7 @@ public class Gun  {
         this.x = x;
         this.y = y;
         dx = 2;
-        dy = 2;
+        dy = 5;
         isMoving = true;
         canShoot = true;
         x2 = 50;
@@ -29,17 +29,17 @@ public class Gun  {
     }
 
     public void draw(Graphics g) {
-        //g.fillOval(250, 100, 5, 5);
         g.setColor(color);
 
         g.drawRect(x,y, width,height);
         g.fillRect(x,y,width,height);
 
     }
-    public void setCenter(int xIn, int yIn) {
-        x = xIn;
-        y = yIn;
+
+    public void setDy(int dy) {
+        this.dy =this.dy + dy;
     }
+
     public void move() {
         y = y + dy;
 
@@ -51,6 +51,10 @@ public class Gun  {
         if ((y - width <= yLow && dy < 0) || (y + width >= yHigh && dy > 0)) {
             dy = -dy;
         }
+//        if ((y - width < yLow && dy < 0) || (y + width > yHigh && dy > 0)) {
+//            dy = -dy;
+//        }
+
 
     }
 

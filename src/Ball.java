@@ -17,7 +17,7 @@ public class Ball {
         dx = 2;
         dy = 2;
         radius = 30;
-        color = Color.GREEN;
+        color = new Color(94, 245, 97);
         this.miniBall= miniBall;
         this.comMiniBall = comMiniBall;
     }
@@ -51,11 +51,15 @@ public class Ball {
         if (x <= miniBall.getX() && miniBall.getX() <= x + 2*radius){
             if (!(miniBall.getY() > 330)){
                 if (!(miniBall.getY() + (miniBall.getRadius() *2) < y)){
-                    x = x - dx;
+                    if(miniBall.getDx()<-5){
+                        x=x-(3*dx);
+                    }
+                    else{
+                        x = x - dx;
+                    }
                 }
             }
         }
-
 
 
         if (x <= comMiniBall.getX() && comMiniBall.getX() <= x + 2*radius){

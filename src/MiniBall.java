@@ -53,6 +53,15 @@ public class MiniBall {
         x = x + dx;
 
     }
+    public void addDX(int dx){
+        this.dx =this.dx + dx;
+
+    }
+
+    public int getDx() {
+        return dx;
+    }
+
     public void bounce(int xLow, int xHigh, int yLow, int yHigh) {
         // Check for an x bounce.  Note that we bounce if the x is too
         //  low or too high AND IS HEADING IN THE WRONG DIRECTION.
