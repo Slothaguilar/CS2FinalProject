@@ -67,11 +67,17 @@ public class GameViewer extends JFrame {
         // draw the instructions
         g.setColor(Color.BLACK);
         g.setFont(new Font("Serif", Font.PLAIN, 20));
-        g.drawString("Welcome to PushBall! You and are playing against the computer!!", 100 ,200);
-        g.drawString("You will have a gun and have to hit the ball in the middle and",100,250);
-        g.drawString("get it on the side of the computer to win. Select a level to",100,300);
-        g.drawString("play below. Good Luck!",100,350);
+        g.drawString("Welcome to PushBall! You are playing against the computer!!", 100 ,200);
+        g.drawString("1) You will have a gun ",100,250);
+        g.drawString("2) Aim and fire at the ball in th middle with the up arrow.",100,300);
+        g.drawString("3) To win, get the ball to the computer side",100,350);
+        g.drawString("To start, pick a level below.",100,400);
 
+        g.setFont(new Font("Courgette", Font.PLAIN, 25 ));
+        g.drawString("Good Luck!",400,400);
+
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Serif", Font.PLAIN, 20));
         g.setColor(Color.GREEN);
         g.drawString("Easy", 200, 450);
 
