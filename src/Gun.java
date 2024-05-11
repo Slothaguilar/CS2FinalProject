@@ -1,71 +1,40 @@
 import java.awt.*;
 
+/**
+ * Gun
+ * Written by Sofia Aguilar on May 10, 2024
+ *
+ * Gun this for the user or the computer to compete,shoots out mini balls, and move up and down.
+ */
 public class Gun  {
     private int x;              // Center x
-    private int y;// Center y
-    private int x2;              // Center x
-    private int y2;
-    private int dx;             // delta x in one time unit
-    private int dy;             // delta y in one time unit
-    private boolean canShoot;
+    private int y;              // Center y
+    private int dy;             // Delta y in one time unit
+    private boolean canShoot;   // When the gun can shoot
+
+    // Width and height of gun
     private final int width = 100;
     private final int height = 50;
-    private boolean isMoving;
-    private Color color;
+    private Color color;    // Color of the gun
 
 
     public Gun(int x, int y, Color color) {
+        // Initializing the instance variables
         this.x = x;
         this.y = y;
-        dx = 2;
-        dy = 5;
-        isMoving = true;
         canShoot = true;
-        x2 = 50;
-        y2 = 50;
         this.color = color;
-
-
+        dy = 4;
     }
 
     public void draw(Graphics g) {
+        // Drawing the gun
         g.setColor(color);
-
         g.drawRect(x,y, width,height);
         g.fillRect(x,y,width,height);
 
     }
-
-    public void setDy(int dy) {
-        this.dy =this.dy + dy;
-    }
-
-    public void move() {
-        y = y + dy;
-
-    }
-    public void bounce(int yLow, int yHigh) {
-        // Check for an x bounce.  Note that we bounce if the x is too
-        //  low or too high AND IS HEADING IN THE WRONG DIRECTION.
-        // Now check for a y bounce.
-        if ((y - width <= yLow && dy < 0) || (y + width >= yHigh && dy > 0)) {
-            dy = -dy;
-        }
-//        if ((y - width < yLow && dy < 0) || (y + width > yHigh && dy > 0)) {
-//            dy = -dy;
-//        }
-
-
-    }
-
-    public boolean isMoving() {
-        return isMoving;
-    }
-
-    public void setMoving(boolean moving) {
-        isMoving = moving;
-    }
-
+    // Getters and Setters
     public int getY() {
         return y;
     }
@@ -82,5 +51,19 @@ public class Gun  {
         this.canShoot = canShoot;
     }
 
+    public void setDy(int dy) {
+        this.dy =this.dy + dy;
+    }
 
+    // The movement of the gun
+    public void move() {
+        y = y + dy;
+
+    }
+    // Making the gun go up and down
+    public void bounce(int yLow, int yHigh) {
+        if ((y - width <= yLow && dy < 0) || (y + width >= yHigh && dy > 0)) {
+            dy = -dy;
+        }
+    }
 }

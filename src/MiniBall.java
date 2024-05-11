@@ -1,29 +1,31 @@
 import java.awt.Color;
 import java.awt.Graphics;
+
+/**
+ * MiniBall
+ * Written by Sofia Aguilar on May 10, 2024
+ *
+ * MiniBall creates mini ball for the computer and the user,can help move the ball in the middle to move, and moves the left por right.
+ */
 public class MiniBall {
     private int x;              // Center x
     private int y;              // Center y
-    private int dx;             // delta x in one time unit
-    private int dy;             // delta y in one time unit
+    private int dx;             // Delta x in one time unit
     private int radius;         // Radius of the ball
-    private Color color;
-    private boolean isOnScreen;
-    private Gun gun;
-    private int x2;              // Center x
-    private int y2;
+    private Color color;        // Color of the mini balls
+    private boolean isOnScreen; // If the mini ball is on the screen
 
-    public MiniBall(Gun gun, int x, int y, int dx, Color color) {
+    public MiniBall(int x, int y, int dx, Color color) {
+        // Initializing the instance variables
         this.dx = dx;
-        dy = 5;
         radius = 10;
         this.color = color;
-        isOnScreen = false;
-        this.gun = gun;
         this. x = x;
         this.y = y;
-
+        // For the intro make the mini ball not show up
+        isOnScreen = false;
     }
-
+    // Getters and Setters
     public int getX() {
         return x;
     }
@@ -44,37 +46,9 @@ public class MiniBall {
         return radius;
     }
 
-    public void draw(Graphics g) {
-        g.setColor(color);
-        g.fillOval(x, y, 2 * radius, 2 * radius);
-
-    }
-    public void move() {
-        x = x + dx;
-
-    }
-    public void addDX(int dx){
-        this.dx =this.dx + dx;
-
-    }
-
     public int getDx() {
         return dx;
     }
-
-    public void bounce(int xLow, int xHigh, int yLow, int yHigh) {
-        // Check for an x bounce.  Note that we bounce if the x is too
-        //  low or too high AND IS HEADING IN THE WRONG DIRECTION.
-        if ((x - radius <= xLow && dx < 0) || (x + radius >= xHigh && dx > 0)) {
-            dx = -dx;
-        }
-
-        // Now check for a y bounce.
-        if ((y - radius <= yLow && dy < 0) || (y + radius >= yHigh && dy > 0)) {
-            dy = -dy;
-        }
-    }
-
     public boolean isOnScreen() {
         return isOnScreen;
     }
@@ -83,13 +57,29 @@ public class MiniBall {
         isOnScreen = onScreen;
     }
 
+    // Make the mini balls move faster
+    public void addDX(int dx){
+        this.dx =this.dx + dx;
+
+    }
+    // Draw out the mini balls
+    public void draw(Graphics g) {
+        g.setColor(color);
+        g.fillOval(x, y, 2 * radius, 2 * radius);
+
+    }
+    // Mini ball's movement
+    public void move() {
+        x = x + dx;
+
+    }
+    // Generate when the computer's balls can be released
     public boolean canBeMoved(){
         double random = (Math.random()*2);
-
+        // If higher or equal to one then don't shoot
         if(random >= 1){
             return false;
         }
-
         return true;
     }
 }
